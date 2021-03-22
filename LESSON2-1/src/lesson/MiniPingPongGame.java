@@ -12,7 +12,7 @@ public class MiniPingPongGame extends JPanel implements KeyListener {
 	protected Racquet racquet2;
 	
 	public MiniPingPongGame() {
-		ball = new Ball(this, Color.red); // this: MiniPingPongGame자기자진을 뜻함.
+		ball = new Ball(this, Color.red); // this: MiniPingPongGame자기자신을 뜻함.
 		this.setBackground(Color.green);
 		racquet1 = new Racquet(this, 10, 150, Color.blue, 1);
 		racquet2 = new Racquet(this, 560, 150, Color.yellow, 2);
@@ -59,7 +59,7 @@ public class MiniPingPongGame extends JPanel implements KeyListener {
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		
 		MiniPingPongGame game = new MiniPingPongGame(); // 패널을 만듬.
-		frame.add(game); // 프레임에 패널을 넣음
+		frame.add(game); // 프레임에 패널을 넣음.
 		frame.setVisible(true); // 보이게 만듬.
 		while (true) { // 무한 루트 실행.
 			game.move();
@@ -94,7 +94,7 @@ class Ball {
 			ySpeed = 1;
 		if (y + ySpeed > game.getHeight() -2 * RADIUS)
 			ySpeed = -1;
-		if (collision()) // 라켓에 닿았는지 확인해야함(구현을 해야함!!!)
+		if (collision()) // 라켓에 닿았는지 확인해야함으로 아래에서 구현함.
 			xSpeed = -xSpeed;
 		x += xSpeed;
 		y += ySpeed;
@@ -158,7 +158,7 @@ class Racquet {
 		ySpeed = 0;
 	}
 	
-	public void keyPressed(KeyEvent e) { // ??키를 눌렀을 경우 x,y 좌료로 움직임.
+	public void keyPressed(KeyEvent e) { // (설정한) 키를 눌렀을 경우 x, y 좌표로 움직임.
 		if (id == 1) {
 			if (e.getKeyCode() == KeyEvent.VK_UP)
 				ySpeed = -3;
