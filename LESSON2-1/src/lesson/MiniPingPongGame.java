@@ -14,8 +14,8 @@ public class MiniPingPongGame extends JPanel implements KeyListener {
 	public MiniPingPongGame() {
 		ball = new Ball(this, Color.red); // this: MiniPingPongGame자기자진을 뜻함.
 		this.setBackground(Color.green);
-		racquet1 = new Racquet(this, 10, 150, Color.blue);
-		racquet2 = new Racquet(this, 560, 150, Color.yellow);
+		racquet1 = new Racquet(this, 10, 150, Color.blue, 1);
+		racquet2 = new Racquet(this, 560, 150, Color.yellow, 2);
 		this.setFocusable(true);
 		this.addKeyListener(this);
 	}
@@ -129,16 +129,19 @@ class Racquet {
 	private static final int WIDTH = 10;
 	private static final int HEIGHT = 80;
 	private int x = 0, y = 0;
+	private int id;
+	
 	private int xSpeed = 0;
 	private int ySpeed = 0;
 	private MiniPingPongGame game;
 	private Color color;
 	
-	public Racquet(MiniPingPongGame game, int x, int y, Color color) {
+	public Racquet(MiniPingPongGame game, int x, int y, Color color, int id) {
 		this.game = game;
 		this.x = x;
 		this.y = y;
 		this.color = color;
+		this.id = id;
 	}
 	
 	public void move() {
@@ -155,11 +158,21 @@ class Racquet {
 		ySpeed = 0;
 	}
 	
-	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_UP)
+	public void keyPressed(KeyEvent e) { // ??키를 눌렀을 경우 x,y 좌료로 움직임.
+		if (id == 1) {
+			if (e.getKeyCode() == KeyEvent.VK_UP)
+				ySpeed = -3;
+			else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+				ySpeed = 3;
+		}
+
+		if (id == 2) {
+			if (e.getKeyCode() == KeyEvent.VK_W)
 			ySpeed = -3;
-		else if (e.getKeyCode() == KeyEvent.VK_DOWN)
+		else if (e.getKeyCode() == KeyEvent.VK_S)
 			ySpeed = 3;
+
+		}
 	}
 	
 	public Rectangle getBounds() {
